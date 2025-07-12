@@ -34,6 +34,14 @@ jobs:
       - name: Fix permissions for Docker image tar
         run: chmod 644 dashboard-backend.tar
 
+      - name: Cleanup old dashboard-backend.tar on server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: rm -rf /root/dashboard-backend.tar
+
       - name: Copy Docker image tar to server via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
