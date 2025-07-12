@@ -1,0 +1,50 @@
+CREATE TABLE users (
+   id SERIAL PRIMARY KEY,
+   email VARCHAR(255) UNIQUE NOT NULL,
+   password VARCHAR(255) NOT NULL,
+   is_active BOOLEAN NOT NULL DEFAULT TRUE,
+   role VARCHAR(255) NOT NULL DEFAULT 'subscriber',
+   created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
+   updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE user_profiles (
+   id SERIAL PRIMARY KEY,
+   user_id BIGINT NOT NULL,
+   fname VARCHAR(255) NOT NULL,
+   lname VARCHAR(255) NOT NULL,
+   email VARCHAR(255) NOT NULL,
+   phone VARCHAR(255) NOT NULL,
+   address VARCHAR(255),
+   city VARCHAR(255),
+   state VARCHAR(255),
+   zip VARCHAR(255),
+   country VARCHAR(255),
+   website VARCHAR(255),
+   linkedin VARCHAR(255),
+   twitter VARCHAR(255),
+   facebook VARCHAR(255),
+   instagram VARCHAR(255),
+   youtube VARCHAR(255),
+   tiktok VARCHAR(255),
+   pinterest VARCHAR(255),
+   github VARCHAR(255),
+   gitlab VARCHAR(255),
+   bitbucket VARCHAR(255),
+   created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
+   updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
+   CONSTRAINT fk_user_profiles_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
+CREATE TABLE projects (
+  id SERIAL PRIMARY KEY,
+  user_id BIGINT NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  status VARCHAR(255) NOT NULL DEFAULT 'draft',
+  type VARCHAR(255) NOT NULL DEFAULT 'project',
+  url VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
+  CONSTRAINT fk_projects_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);

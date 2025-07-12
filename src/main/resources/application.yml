@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: Task Manager Backend
+
+  datasource:
+    url: jdbc:postgresql://95.111.228.138:5432/taskmanagement
+    username: postgres
+    password: admin123
+
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://95.111.228.138:5432/taskmanagement
+    user: postgres
+    password: admin123
+    locations: classpath:db/migration
+
+  r2dbc:
+    url: r2dbc:postgresql://95.111.228.138:5432/taskmanagement
+    username: postgres
+    password: admin123
+
+logging:
+  level:
+    org.flywaydb: DEBUG
