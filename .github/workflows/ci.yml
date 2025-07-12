@@ -59,6 +59,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            rm -rf ~/dashboard-backend.tar
             docker stop dashboard-backend || true
             docker rm dashboard-backend || true
             docker rmi dashboard-backend:latest || true
