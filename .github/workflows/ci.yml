@@ -42,6 +42,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "dashboard-backend.tar"
           target: "/root"
+          overwrite: true
 
       - name: SSH and deploy Docker container
         uses: appleboy/ssh-action@v1.0.0
